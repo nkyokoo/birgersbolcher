@@ -6,72 +6,87 @@
         xmlns:local="clr-namespace:birgersbolcher"
         xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         mc:Ignorable="d"
-        Title="Birgers Bolcher" Height="492" Width="812" ResizeMode="NoResize" Visibility="Visible" WindowStyle="None">
+        Title="Birgers Bolcher" Height="545.666" Width="812.252" ResizeMode="NoResize" Visibility="Visible" WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/themes/materialdesigntheme.textblock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <StackPanel Background="#FF3F51B5">
-        <Grid Background="#FF1D1B1B" HorizontalAlignment="Left" Width="812">
-            <dragablz:TabablzControl Margin="0,41,0,-492" Height="451" VerticalAlignment="Top" FontFamily="Roboto" HorizontalAlignment="Right" Width="812">
+        <Grid Background="#212121" HorizontalAlignment="Left" Width="812">
+            <dragablz:TabablzControl Background="#212121" Margin="0,38,-2,-548" FontFamily="Roboto" HorizontalAlignment="Right" Width="814" Height="510" VerticalAlignment="Top" Foreground="White" BorderBrush="{x:Null}">
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController />
                 </dragablz:TabablzControl.InterTabController>
                 <TabItem Header="Bolcher Database" HorizontalAlignment="Left" Width="120" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto" IsSelected="True">
                     <Grid Background="#212121" Margin="0,0,-2,1">
 
-                        <DataGrid Margin="0,75,0,0" SelectionChanged="DataGrid_SelectionChanged" BorderBrush="#FF487097" Background="#FF444040"/>
+                        <DataGrid Margin="0,101,0,0" BorderBrush="#FF487097" Background="#FF444040"/>
+                        <Button x:Name="Showall" Content="Vis alle" HorizontalAlignment="Left" Margin="489,60,0,0" VerticalAlignment="Top" Width="82" Height="29" Click="Showall_Click"/>
+                        <TextBox x:Name="Searchbar" HorizontalAlignment="Left" Height="23" Margin="598,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="White" Foreground="White" BorderBrush="White"/>
+                        <Button x:Name="Notred" Content="Vis ikke røde" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="23" Click="Notred_Click"/>
+                        <Button x:Name="Searchbutton" Content="Søg" HorizontalAlignment="Left" Margin="729,10,0,0" VerticalAlignment="Top" Width="77" Height="23" Click="Searchbutton_Click"/>
+                        <Button x:Name="under10" Content="Vis alle under 10 gram" HorizontalAlignment="Left" Margin="181,50,0,0" VerticalAlignment="Top" Width="140" Height="29" Click="under10_Click"/>
+                        <Button x:Name="between10_12" Content="Bolcher mellem 10-12 gram" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="160" Height="29" Click="between10_12_Click"/>
+                        <Button x:Name="heaviestbolcher" Content="tungeste bolcher" HorizontalAlignment="Left" Margin="582,60,0,0" VerticalAlignment="Top" Width="136" Height="29" Click="heaviestbolcher_Click"/>
+                        <Button x:Name="randombutton" Content="random" HorizontalAlignment="Left" Margin="731,60,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="randombutton_Click"/>
 
 
                     </Grid>
                 </TabItem>
                 <TabItem Header="Register Bolcher" BorderBrush="#FF2E2D2D" Background="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto">
-                    <Grid Background="#212121" Margin="0,0,-1,-3">
-                        <Border BorderBrush="#FFF75454" BorderThickness="1" CornerRadius="8" Height="31" Width="78" Margin="305,254,406,98" Background="#FFF75454">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#FF3E3E3E" BlurRadius="10" ShadowDepth="1" Direction="0"/>
-                            </Border.Effect>
-                            <Button Content="Register" Width="{Binding MyBorder.Width}"  Height="{Binding MyBorder.Height}" Background="{x:Null}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto"/>
-                        </Border>
+                    <Grid  Margin="0,-1,-1,-4" HorizontalAlignment="Left" Width="817">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="297*"/>
+                            <ColumnDefinition Width="520*"/>
+                        </Grid.ColumnDefinitions>
 
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="284,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="284,40,0,0" TextWrapping="Wrap" Text="Navn" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="284,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="284,156,0,0" TextWrapping="Wrap" Text="Gram" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto"/>
-                        <ComboBox HorizontalAlignment="Left" Margin="284,117,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="284,96,0,0" TextWrapping="Wrap" Text="Farve" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto"/>
+                        <Button x:Name="registerBolcher" Content="Register" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="2,0,0,10" Background="#FFF05C5C" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="87" Click="registerBolcher_Click" Grid.Column="1"/>
+
+
+                        <TextBox x:Name="bolcherName" HorizontalAlignment="Left" Height="23" Margin="284,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="284,24,0,0" TextWrapping="Wrap" Text="Navn" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="bolcherweight" HorizontalAlignment="Left" Height="23" Margin="282,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="282,129,0,0" TextWrapping="Wrap" Text="Gram" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="bolcherColor" HorizontalAlignment="Left" Margin="282,95,0,0" VerticalAlignment="Top" Width="120"  BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="282,74,0,0" TextWrapping="Wrap" Text="Farve" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="bolchersourness" HorizontalAlignment="Left" Margin="282,208,0,0" VerticalAlignment="Top" Width="120" BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="284,187,0,0" TextWrapping="Wrap" Text="Smagssurhed" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="bolcherstrenth" HorizontalAlignment="Left" Margin="282,267,0,0" VerticalAlignment="Top" Width="120"   BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="284,246,0,0" TextWrapping="Wrap" Text="Smagsstyrke" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Width="93" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="bolchertype" HorizontalAlignment="Left" Margin="282,324,0,0" VerticalAlignment="Top" Width="120" BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="282,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Width="93" Grid.ColumnSpan="2"><Run Text="Smagstype"/><LineBreak/><Run/></TextBlock>
+                        <TextBox x:Name="bolcherprice" HorizontalAlignment="Left" Height="23" Margin="284,383,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="282,362,0,0" TextWrapping="Wrap" Text="Pris" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" RenderTransformOrigin="0.579,2.401" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Register smag" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto">
+                <TabItem Header="Register bolcher typer" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto">
                     <Grid Background="#212121">
-
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Register smag styrke" Foreground="#FFF0E6E6" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" FontFamily="Roboto">
-                    <Grid Background="#212121">
-
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Register surhed" Background="#FF2E2D2D" Foreground="#FFF0E6E6" BorderBrush="#FF2E2D2D" FontFamily="Roboto">
-                    <Grid Background="#212121">
-
+                        <Button x:Name="register_color" Content="Register farve" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="64,0,0,241" Background="#FFF05C5C" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="87" Click="register_color_Click"/>
+                        <TextBox x:Name="color_name" HorizontalAlignment="Left" Height="23" Margin="64,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="White" SelectionBrush="White" BorderBrush="White"/>
+                        <Label Content="Farve" HorizontalAlignment="Left" Margin="64,107,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+                        <Button x:Name="register_taste_type" Content="Register &#xD;&#xA;smagstype" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="218,0,0,241"  Background="#FFF05C5C" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="120" Click="register_taste_type_Click"/>
+                        <TextBox x:Name="taste_type" HorizontalAlignment="Left" Height="23" Margin="218,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="White" SelectionBrush="White" BorderBrush="White"/>
+                        <Label Content="Smagstype" HorizontalAlignment="Left" Margin="218,107,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+                        <TextBox x:Name="taste_sourness" HorizontalAlignment="Left" Height="23" Margin="382,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" Foreground="White" SelectionBrush="White" BorderBrush="White"/>
+                        <Label Content="Smagssurhed" HorizontalAlignment="Left" Margin="382,107,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+                        <Button x:Name="register_taste_sourness" Content="Register &#xD;&#xA;smagsurhed" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="382,0,0,241"  Background="#FFF05C5C" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="153" Click="register_taste_sourness_Click"/>
+                        <TextBox x:Name="taste_strength" HorizontalAlignment="Left" Height="23" Margin="579,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Foreground="White" SelectionBrush="White" BorderBrush="White"/>
+                        <Label Content="Smagsstyrke" HorizontalAlignment="Left" Margin="579,107,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+                        <Button x:Name="register_taste_strength" Content="Register &#xD;&#xA;smagstyrke" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="579,0,0,241"  Background="#FFF05C5C" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="158" Click="register_taste_strength_Click"/>
                     </Grid>
                 </TabItem>
             </dragablz:TabablzControl>
 
         </Grid>
-        <Grid Height="38">
+        <Grid x:Name="topbar" Height="38">
             <Label Content="Birgers Bolcher" Foreground="White" FontFamily="Roboto" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.32,0.389" Margin="-1,0,0,0" Width="147" Height="35"/>
-            <Border BorderThickness="1" CornerRadius="8" Margin="785,7,10,14" Background="#FFF75454">
-                <Border.Effect>
-                    <DropShadowEffect Color="#FF3E3E3E" BlurRadius="10" ShadowDepth="1" Direction="0"/>
-                </Border.Effect>
-                <Button Content=" x" Background="{x:Null}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="-1,-3,-2,-2" Click="Button_Click" UseLayoutRounding="True"/>
-            </Border>
-            <Border BorderThickness="1" CornerRadius="8" Margin="763,7,32,14" Background="#FF54F788">
-                <Border.Effect>
-                    <DropShadowEffect Color="#FF3E3E3E" BlurRadius="10" ShadowDepth="1" Direction="0"/>
-                </Border.Effect>
-                <Button Content="  -" Width="20"  Height="20" Background="{x:Null}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="-2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_1" RenderTransformOrigin="0.762,0.488"/>
-            </Border>
+            <Button Content="x"  Style="{DynamicResource MaterialDesignFlatAccentButton}" Background="#FFF14B30" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="789,0,0,0" Click="Button_Click" UseLayoutRounding="True" HorizontalAlignment="Left" Width="23" Height="23" VerticalAlignment="Top" RenderTransformOrigin="28,1.174"/>
+
+            <Button Content="-" Style="{DynamicResource MaterialDesignFlatAccentButton}" Width="25"  Height="23" Background="#FF25CF6A" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="761,0,26,15" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_1" RenderTransformOrigin="0.762,0.488"/>
+
 
         </Grid>
 
