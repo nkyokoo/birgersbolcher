@@ -70,9 +70,8 @@ namespace birgersbolcher
         private void register_color_Click(object sender, RoutedEventArgs e)
         {
             command = connection.CreateCommand();
-            command.CommandText = "NSERT INTO color (`id`, `name`) VALUES (,)";
-            command.Parameters.Add("@rownum", MySqlDbType.Int32);
-            command.Parameters["@rownum"].Value = -1;
+            command.CommandText = "NSERT INTO color (`id_color`, `name`) VALUES (?)";
+            command.Parameters.Add(color_name.Text);
             adapter.SelectCommand = command;
 
         }
