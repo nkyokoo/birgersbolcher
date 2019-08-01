@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Background="#FF3F51B5">
+    <StackPanel Background="#FF3F51B5" MouseDown="Dragwindow">
         <Grid Background="#212121" HorizontalAlignment="Left" Width="812">
             <dragablz:TabablzControl Background="#212121" Margin="0,38,-2,-548" FontFamily="Roboto" HorizontalAlignment="Right" Width="814" Height="510" VerticalAlignment="Top" Foreground="White" BorderBrush="{x:Null}">
                 <dragablz:TabablzControl.InterTabController>
