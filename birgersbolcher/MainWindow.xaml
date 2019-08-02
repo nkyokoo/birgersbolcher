@@ -10,7 +10,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/themes/materialdesigntheme.textblock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/themes/materialdesigntheme.textblock.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -23,14 +23,14 @@
                 <TabItem Header="Bolcher Database" HorizontalAlignment="Left" Width="120" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto" IsSelected="True">
                     <Grid Background="#212121" Margin="0,0,-2,1">
 
-                        <DataGrid Margin="0,101,0,0" BorderBrush="#FF487097" Background="#FF444040"/>
-                        <Button x:Name="Showall" Content="Vis alle" HorizontalAlignment="Left" Margin="489,60,0,0" VerticalAlignment="Top" Width="82" Height="29" Click="Showall_Click"/>
-                        <TextBox x:Name="Searchbar" HorizontalAlignment="Left" Height="23" Margin="598,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="White" Foreground="White" BorderBrush="White"/>
+                        <DataGrid x:Name="bolcherTable" Margin="0,101,0,0" BorderBrush="#FF487097" Background="#FFEAEAEA"/>
+                        <Button x:Name="Showall" Content="Vis alle" HorizontalAlignment="Left" Margin="467,60,0,0" VerticalAlignment="Top" Width="82" Height="29" Click="Showall_Click"/>
+                        <TextBox x:Name="Searchbar" HorizontalAlignment="Left" Height="23" Margin="585,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="White" Foreground="White" BorderBrush="White"/>
                         <Button x:Name="Notred" Content="Vis ikke røde" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="23" Click="Notred_Click"/>
-                        <Button x:Name="Searchbutton" Content="Søg" HorizontalAlignment="Left" Margin="729,10,0,0" VerticalAlignment="Top" Width="77" Height="23" Click="Searchbutton_Click"/>
+                        <Button x:Name="Searchbutton" Content="Søg" HorizontalAlignment="Left" Margin="723,10,0,0" VerticalAlignment="Top" Width="77" Height="32" Click="Searchbutton_Click"/>
                         <Button x:Name="under10" Content="Vis alle under 10 gram" HorizontalAlignment="Left" Margin="181,50,0,0" VerticalAlignment="Top" Width="140" Height="29" Click="under10_Click"/>
                         <Button x:Name="between10_12" Content="Bolcher mellem 10-12 gram" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="160" Height="29" Click="between10_12_Click"/>
-                        <Button x:Name="heaviestbolcher" Content="tungeste bolcher" HorizontalAlignment="Left" Margin="582,60,0,0" VerticalAlignment="Top" Width="136" Height="29" Click="heaviestbolcher_Click"/>
+                        <Button x:Name="heaviestbolcher" Content="tungeste bolcher" HorizontalAlignment="Left" Margin="568,60,0,0" VerticalAlignment="Top" Width="150" Height="29" Click="heaviestbolcher_Click"/>
                         <Button x:Name="randombutton" Content="random" HorizontalAlignment="Left" Margin="731,60,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="randombutton_Click"/>
 
 
