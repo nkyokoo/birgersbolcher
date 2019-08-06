@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:birgersbolcher"
         xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         mc:Ignorable="d"
-        Title="Birgers Bolcher" Height="545.666" Width="812.252" ResizeMode="NoResize" Visibility="Visible" WindowStyle="None">
+        Title="Birgers Bolcher" Height="546" Width="813" ResizeMode="NoResize" Visibility="Visible" WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,37 +14,36 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Background="#FF3F51B5" MouseDown="Dragwindow">
+    <StackPanel>
         <Grid Background="#212121" HorizontalAlignment="Left" Width="812">
-            <dragablz:TabablzControl Background="#212121" Margin="0,38,-2,-548" FontFamily="Roboto" HorizontalAlignment="Right" Width="814" Height="510" VerticalAlignment="Top" Foreground="White" BorderBrush="{x:Null}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="487*"/>
+                <ColumnDefinition Width="325*"/>
+            </Grid.ColumnDefinitions>
+            <dragablz:TabablzControl Margin="-1,22,-2,-546" FontFamily="Roboto" Foreground="White" BorderBrush="#FF212223" Background="#FF474747" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="815" Height="524" VerticalAlignment="Top">
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController />
                 </dragablz:TabablzControl.InterTabController>
-                <TabItem Header="Bolcher Database" HorizontalAlignment="Left" Width="120" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto" IsSelected="True">
-                    <Grid Background="#212121" Margin="0,0,-2,1">
+                <TabItem Header="Bolcher Database" HorizontalAlignment="Left" Width="120" Background="#4f5b62" BorderBrush="#FF4F5B62" Foreground="#FFF0E6E6" FontFamily="Roboto" IsSelected="True">
+                    <Grid Background="#FF151819" Margin="0,0,-2,1">
 
-                        <DataGrid x:Name="bolcherTable" Margin="0,101,0,0" BorderBrush="#FF487097" Background="#FFEAEAEA"/>
+                        <DataGrid x:Name="bolcherTable" Margin="0,101,0,0" BorderBrush="#FF487097" ItemsSource="{Binding}" CanUserDeleteRows="False" IsReadOnly="True" CanUserReorderColumns="False" Background="#FF1F1E1E" CanUserAddRows="False"/>
                         <Button x:Name="Showall" Content="Vis alle" HorizontalAlignment="Left" Margin="467,60,0,0" VerticalAlignment="Top" Width="82" Height="29" Click="Showall_Click"/>
                         <TextBox x:Name="Searchbar" HorizontalAlignment="Left" Height="23" Margin="585,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="White" Foreground="White" BorderBrush="White"/>
-                        <Button x:Name="Notred" Content="Vis ikke røde" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="23" Click="Notred_Click"/>
+                        <Button x:Name="Notred" Content="Vis ikke røde" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="26" Click="Notred_Click"/>
+                        <Button x:Name="blueandred" Content="Vis røde og blå" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top" Width="140" Height="26" Click="blueandred_Click" />
                         <Button x:Name="Searchbutton" Content="Søg" HorizontalAlignment="Left" Margin="723,10,0,0" VerticalAlignment="Top" Width="77" Height="32" Click="Searchbutton_Click"/>
-                        <Button x:Name="under10" Content="Vis alle under 10 gram" HorizontalAlignment="Left" Margin="181,50,0,0" VerticalAlignment="Top" Width="140" Height="29" Click="under10_Click"/>
-                        <Button x:Name="between10_12" Content="Bolcher mellem 10-12 gram" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="160" Height="29" Click="between10_12_Click"/>
+                        <Button x:Name="under10" Content="Vis under 10g" HorizontalAlignment="Left" Margin="220,50,0,0" VerticalAlignment="Top" Width="140" Height="29" Click="under10_Click"/>
+                        <Button x:Name="between10_12" Content="Bolcher mellem 10g-12g" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="200" Height="29" Click="between10_12_Click"/>
                         <Button x:Name="heaviestbolcher" Content="tungeste bolcher" HorizontalAlignment="Left" Margin="568,60,0,0" VerticalAlignment="Top" Width="150" Height="29" Click="heaviestbolcher_Click"/>
-                        <Button x:Name="randombutton" Content="random" HorizontalAlignment="Left" Margin="731,60,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="randombutton_Click"/>
+                        <Button x:Name="randombutton" Content="random" HorizontalAlignment="Left" Margin="725,60,0,0" VerticalAlignment="Top" Width="80" Height="29" Click="randombutton_Click"/>
 
 
                     </Grid>
                 </TabItem>
-                <TabItem Header="Register Bolcher" BorderBrush="#FF2E2D2D" Background="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto">
-                    <Grid  Margin="0,-1,-1,-4" HorizontalAlignment="Left" Width="817">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="297*"/>
-                            <ColumnDefinition Width="520*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Button x:Name="registerBolcher" Content="Register" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="2,0,0,10" Background="#FFF05C5C" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="87" Click="registerBolcher_Click" Grid.Column="1"/>
-
+                <TabItem x:Name="registerBolcherTab" Header="Register Bolcher" BorderBrush="#FF4F5B62" Background="#4f5b62" Foreground="#FFF0E6E6" FontFamily="Roboto">
+                    <Grid  Margin="0,-1,-1,-4" HorizontalAlignment="Left" Width="817" Background="#FF151819">
+                        <Button x:Name="registerBolcher" Content="Register" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="304,0,0,19" Background="#FFF05C5C" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="87" Click="registerBolcher_Click" RenderTransformOrigin="0.5,0.5"/>
 
                         <TextBox x:Name="bolcherName" HorizontalAlignment="Left" Height="23" Margin="284,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  BorderBrush="White" Foreground="White" Grid.ColumnSpan="2"/>
                         <TextBlock HorizontalAlignment="Left" Margin="284,24,0,0" TextWrapping="Wrap" Text="Navn" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" Grid.ColumnSpan="2"/>
@@ -62,8 +61,8 @@
                         <TextBlock HorizontalAlignment="Left" Margin="282,362,0,0" TextWrapping="Wrap" Text="Pris" VerticalAlignment="Top" Foreground="#FFECECEC" FontFamily="Roboto" RenderTransformOrigin="0.579,2.401" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Register bolcher typer" Background="#FF2E2D2D" BorderBrush="#FF2E2D2D" Foreground="#FFF0E6E6" FontFamily="Roboto">
-                    <Grid Background="#212121">
+                <TabItem Header="Register bolcher typer" Background="#4f5b62" BorderBrush="{x:Null}" Foreground="#FF151819" FontFamily="Roboto">
+                    <Grid Background="#FF151819">
                         <Button x:Name="register_color" Content="Register farve" Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="64,0,0,241" Background="#FFF05C5C" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="87" Click="register_color_Click"/>
                         <TextBox x:Name="color_name" HorizontalAlignment="Left" Height="23" Margin="64,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="White" SelectionBrush="White" BorderBrush="White"/>
                         <Label Content="Farve" HorizontalAlignment="Left" Margin="64,107,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
@@ -81,14 +80,18 @@
             </dragablz:TabablzControl>
 
         </Grid>
-        <Grid x:Name="topbar" Height="38">
-            <Label Content="Birgers Bolcher" Foreground="White" FontFamily="Roboto" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.32,0.389" Margin="-1,0,0,0" Width="147" Height="35"/>
-            <Button Content="x"  Style="{DynamicResource MaterialDesignFlatAccentButton}" Background="#FFF14B30" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="789,0,0,0" Click="Button_Click" UseLayoutRounding="True" HorizontalAlignment="Left" Width="23" Height="23" VerticalAlignment="Top" RenderTransformOrigin="28,1.174"/>
+        <Grid x:Name="topbar" Height="23" MouseDown="Dragwindow" Background="#000a12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="787*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="x"  Background="#CB3A4A"  HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="4.667,1,0,0" Click="Button_Click" UseLayoutRounding="True" RenderTransformOrigin="28,1.174" Height="20" VerticalAlignment="Top" Grid.Column="1"/>
+            <Button Content="-" Width="20"  Height="20" Background="#FF25CF6A" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="767,0,0.333,2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="Button_Click_1" RenderTransformOrigin="1.333,0.35"/>
+            <Label Content="Birgers Bolcher" Foreground="White" FontFamily="Roboto" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.32,0.389" Width="86" Height="29" Margin="0,-1,0,-5"/>
 
-            <Button Content="-" Style="{DynamicResource MaterialDesignFlatAccentButton}" Width="25"  Height="23" Background="#FF25CF6A" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" FontFamily="Roboto" Margin="761,0,26,15" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_1" RenderTransformOrigin="0.762,0.488"/>
 
 
         </Grid>
-
     </StackPanel>
+
 </Window>

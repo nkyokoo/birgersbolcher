@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
+using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
 using ComboBox = System.Windows.Controls.ComboBox;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
@@ -29,12 +31,25 @@ namespace birgersbolcher
         public MainWindow()
         {
             InitializeComponent();
+            ITheme theme = new PaletteHelper().GetTheme();
+
+            theme.SetBaseTheme(Theme.Dark);
+
+            theme.SetPrimaryColor(Color.FromRgb(255, 65, 81));
+
+            theme.SetSecondaryColor(Color.FromRgb(253, 71, 78));
+
+            
+            theme.PrimaryMid = new ColorPair(Color.FromRgb(253, 71, 78), Colors.White);
+
+            new PaletteHelper().SetTheme(theme);
             DBConnection db = DBConnection.Instance();
             if (db.IsConnect())
             {
                 try
                 {
                     connection = db.Connection;
+                    
                     command = connection.CreateCommand();
                     command.CommandText = "SELECT * FROM color";
                     command.ExecuteNonQuery();
@@ -95,16 +110,7 @@ namespace birgersbolcher
                 MessageBox.Show(messageBoxText, caption, button, icon);
             }
         }
-
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(1);
@@ -304,21 +310,8 @@ namespace birgersbolcher
 
         private void Notred_Click(object sender, RoutedEventArgs e)
         {
-        }
-
-        private void between10_12_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void under10_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void Searchbutton_Click(object sender, RoutedEventArgs e)
-        {
             command = connection.CreateCommand();
-            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type  WHERE name_bolcher LIKE @q OR (length(name_bolcher) - length(replace(name_bolcher, @q, ''))) >= 2" ;
-            command.Parameters.AddWithValue("@q", Searchbar.Text+"%");
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type WHERE name_color <> 'rød'";
             command.ExecuteNonQuery();
             DataTable table = new DataTable();
             try
@@ -326,12 +319,69 @@ namespace birgersbolcher
                 adapter = new MySqlDataAdapter(command);
                 adapter.SelectCommand = command;
                 adapter.Fill(table);
-                bolcherTable.DataContext = table;
-                BindingSource bSource = new BindingSource();
-                bSource.DataSource = table;
+                bolcherTable.ItemsSource = table.DefaultView;
 
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
 
-                bolcherTable.ItemsSource = bSource;
+        private void between10_12_Click(object sender, RoutedEventArgs e)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type WHERE  weight BETWEEN 10 AND  12 ORDER BY name_bolcher DESC " ;
+            command.ExecuteNonQuery();
+            DataTable table = new DataTable();
+            try
+            {
+                adapter = new MySqlDataAdapter(command);
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                bolcherTable.ItemsSource = table.DefaultView;
+            
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            dr.Close();
+        }
+
+        private void under10_Click(object sender, RoutedEventArgs e)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type WHERE weight < 10";
+            command.ExecuteNonQuery();
+            DataTable table = new DataTable();
+            try
+            {
+                adapter = new MySqlDataAdapter(command);
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                bolcherTable.ItemsSource = table.DefaultView;
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void Searchbutton_Click(object sender, RoutedEventArgs e)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type  WHERE name_bolcher LIKE @q" ;
+            command.Parameters.AddWithValue("@q", "%"+Searchbar.Text+"%");
+            command.ExecuteNonQuery();
+            DataTable table = new DataTable();
+            try
+            {
+                adapter = new MySqlDataAdapter(command);
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                bolcherTable.ItemsSource = table.DefaultView;
 
             }
             catch (Exception exception)
@@ -352,13 +402,11 @@ namespace birgersbolcher
                 adapter = new MySqlDataAdapter(command);
                 adapter.SelectCommand = command;
                 adapter.Fill(table);
-                bolcherTable.DataContext = table;
-                BindingSource bSource = new BindingSource();
-                bSource.DataSource = table;
-
-
-                bolcherTable.ItemsSource = bSource;
-
+                bolcherTable.ItemsSource = table.DefaultView;
+                var color = bolcherTable.Columns[2];
+                var tastesourness = bolcherTable.Columns[4];
+                var tastestrenth = bolcherTable.Columns[5];
+                var tastetype = bolcherTable.Columns[6];
             }
             catch (Exception exception)
             {
@@ -369,10 +417,63 @@ namespace birgersbolcher
 
         private void heaviestbolcher_Click(object sender, RoutedEventArgs e)
         {
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type ORDER BY weight DESC LIMIT 3" ;
+            command.ExecuteNonQuery();
+            DataTable table = new DataTable();
+            try
+            {
+                adapter = new MySqlDataAdapter(command);
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                bolcherTable.ItemsSource = table.DefaultView;
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            dr.Close();
         }
 
         private void randombutton_Click(object sender, RoutedEventArgs e)
         {
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type ORDER BY RAND() LIMIT 1" ;
+            command.ExecuteNonQuery();
+            DataTable table = new DataTable();
+            try
+            {
+                adapter = new MySqlDataAdapter(command);
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                bolcherTable.ItemsSource = table.DefaultView;
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void blueandred_Click(object sender, RoutedEventArgs e)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT id_bolcher,name_bolcher,c.name_color,weight,ts.taste_sourness, t.taste_strength,tt.taste_type,price FROM bolcher INNER JOIN color c on bolcher.color_id_color = c.id_color INNER JOIN taste_sourness ts on bolcher.taste_sourness_id_taste_sourness = ts.id_taste_sourness INNER JOIN taste_strength t on bolcher.taste_id_taste = t.id_taste_strength INNER JOIN taste_type tt on bolcher.taste_type_id_taste_type = tt.id_taste_type WHERE name_color = 'rød' OR name_color = 'blå'" ;
+            command.ExecuteNonQuery();
+            DataTable table = new DataTable();
+            try
+            {
+                adapter = new MySqlDataAdapter(command);
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                bolcherTable.ItemsSource = table.DefaultView;
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }
